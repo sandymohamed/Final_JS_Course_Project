@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#contact-form, #search-form {
+    margin-bottom: 20px;
+}
+
+input {
+    margin: .3rem;
+    padding: .2rem;
+    width: 18rem;
+    height: 3.5vh;
+    border-radius: .5rem;
+ 
+}
+
+#contacts li {
+    margin-bottom: 5px;
+}
+
+button {
+    width: fit-content;
+    height: 5vh;
+    padding: .3rem;
+    border: none;
+    border-radius: .3rem;
+    background-color:rgb(192, 105, 5);
+    color: aliceblue;
+}

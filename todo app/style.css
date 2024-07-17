@@ -1,0 +1,49 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    background: #f4f4f4;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #4c4949 !important;
+}
+
+.remove-btn{
+    background: #ff0000;
+    color: #f4f4f4;
+}
+.complete-btn {
+    background: #4caf50;
+    color: #f4f4f4;
+}
+
+
+.btn {
+    border: none;
+    border-radius: 3rem;
+    cursor: pointer;
+}
