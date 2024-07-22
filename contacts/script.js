@@ -1,77 +1,68 @@
-let tasks = localStorage.getItem('tasks') || [];
-function addTask() {
-    const taskInput = document.getElementById('taskInput');
-    const taskDescription = taskInput.value.trim();
+// Variables + Strings + Objects
+let contacts = [];
 
-    if (taskDescription !== "") {
-        const task = {
-            id: Date.now(),
-            description: taskDescription,
-            completed: false
-        };
+// Functions
+function addContact() {
+    // Variables + Strings
+    let name = document.getElementById('name').value;
+    let phone = document.getElementById('phone').value;
+    let email = document.getElementById('email').value;
 
-        tasks.push(task);
-        taskInput.value = '';
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        displayTasks();
+    // Conditions
+    if (name === "" || phone === "" || email === "") {
+        alert("Please fill out all fields.");
+        return;
+    }
+
+    // Creating an Object
+    let contact = {
+        name: name,
+        phone: phone,
+        email: email
+    };
+
+    // Adding Object to an Array
+    contacts.push(contact);
+
+    // Reset form fields
+    document.getElementById('name').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('email').value = '';
+
+    // Display Contacts
+    displayContacts();
+}
+
+function displayContacts() {
+    let contactList = document.getElementById('contacts');
+    contactList.innerHTML = ''; // Clear the list
+
+    // Loops
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        let li = document.createElement('li');
+        li.textContent = `Name: ${contact.name}, * Phone: ${contact.phone}, * Email: ${contact.email}`;
+        contactList.appendChild(li);
     }
 }
 
-function removeTask(id) {
-    // tasks = tasks.filter(task => task.id !== id);
+function searchContact() {
+    let searchTerm = document.getElementById('search').value.toLowerCase();
+    let contactList = document.getElementById('contacts');
+    contactList.innerHTML = ''; // Clear the list
 
-
-    for (let task = 0; task < tasks.length; task++) {
-        if (tasks[task].id === id) {
-            tasks.splice(task, 1)
-            console.log(tasks);
-            displayTasks();
+    // Loops + Conditions
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        if (contact.name.toLowerCase().includes(searchTerm) ||
+            contact.phone.toLowerCase().includes(searchTerm) ||
+            contact.email.toLowerCase().includes(searchTerm)) {
+            let li = document.createElement('li');
+            li.textContent = `Name: ${contact.name}, * Phone: ${contact.phone}, * Email: ${contact.email}`;
+            contactList.appendChild(li);
         }
     }
-
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    displayTasks();
 }
 
-function toggleTaskCompletion(id) {
-    // const task = tasks.find(task => task.id === id);
-    // task.completed = !task.completed;
-
-    for (let task = 0; task < tasks.length; task++) {
-        if (tasks[task].id === id) {
-            tasks[task].completed = !tasks[task].completed;
-            console.log(tasks);
-            displayTasks();
-        }
-    }
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    displayTasks();
-}
-
-function displayTasks() {
-    const taskList = document.getElementById('taskList');
-    taskList.innerHTML = '';
-
-    if (tasks != null && tasks.length > 0) {
-        console.log(tasks);
-        for (task of tasks) {
-            console.log(task);
-            const li = document.createElement('li');
-            li.className = task.completed ? 'completed' : '';
-            li.innerHTML = `
-            ${task.description}
-            <div>
-                <button onclick="toggleTaskCompletion(${task.id})" class="btn complete-btn">${!task.completed ? 'completed' : 'unCompleted'}</button>
-                <button onclick="removeTask(${task.id})" class="btn remove-btn">Remove</button>
-            </div>
-        `;
-            taskList.appendChild(li);
-        }
-
-    }
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-displayTasks();
+// Display contacts on page load (if any)
+displayContacts();
